@@ -1,6 +1,6 @@
-# Fivetran dbt Transformations Template  
+# Fivetan Facebook Ads DBT package
 
-Welcome to the Fivetran dbt Transformations Template! This repository provides a starter dbt project for building and managing data transformations on top of Fivetran connectors.  
+
 
 ---
 
