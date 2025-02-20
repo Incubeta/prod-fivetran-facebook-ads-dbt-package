@@ -1,0 +1,12 @@
+version: 2
+
+models: 
+  - name: facebook_ad_performance_with_conversion_data_v_1
+    config:
+      materialized: incremental
+      inceremental_strategy: insert_overwrite
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
+
