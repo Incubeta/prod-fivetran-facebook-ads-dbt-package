@@ -1,3 +1,4 @@
+{{config(enabled=var('fivetran_facebook_ads__ad_performance_with_conversion_data_enabled', True))}}
 with performance_report as (
     select *
     from {{ ref('int_fivetran_facebook_ads__ad_performance_v_1') }}
