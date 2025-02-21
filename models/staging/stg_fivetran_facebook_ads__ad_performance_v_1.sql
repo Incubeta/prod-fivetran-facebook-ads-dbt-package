@@ -37,14 +37,14 @@ select
     publisher_platform,
     attribution_setting,
     TRIM(account_currency) as account_currency,
-    CAST(canvas_avg_view_percent as FLOAT) as canvas_avg_view_percent,
-    CAST(canvas_avg_view_time as FLOAT) as canvas_avg_view_time,
-    CAST(frequency as FLOAT) as frequency,
+    CAST(canvas_avg_view_percent as FLOAT64) as canvas_avg_view_percent,
+    CAST(canvas_avg_view_time as FLOAT64) as canvas_avg_view_time,
+    CAST(frequency as FLOAT64) as frequency,
     CAST(clicks as INT64) as clicks,
     CAST(impressions as INT64) as impressions,
     CAST(inline_post_engagement as INT64) as inline_post_engagement,
     CAST(inline_link_clicks as INT64) as inline_link_clicks,
     CAST(reach as INT64) as reach,
-    CAST(spend as FLOAT) as cost
+    CAST(spend as FLOAT64) as cost
 
 from fields

@@ -12,7 +12,7 @@
     {%- if action_or_value == "action" -%}
     CAST( {{ each_action_type_cleaned }}_{{ time_window }}_{{ action_or_value }} AS INT64 ) {{ each_action_type_cleaned }}_{{ time_window }}_{{ action_or_value }},
     {% else %}
-    CAST( {{ each_action_type_cleaned }}_{{ time_window }}_{{ action_or_value }} AS FLOAT ) {{ each_action_type_cleaned }}_{{ time_window }}_{{ action_or_value }},
+    CAST( {{ each_action_type_cleaned }}_{{ time_window }}_{{ action_or_value }} AS FLOAT64 ) {{ each_action_type_cleaned }}_{{ time_window }}_{{ action_or_value }},
     {%- endif -%}
     {%- endfor -%}
 {% endmacro %}
