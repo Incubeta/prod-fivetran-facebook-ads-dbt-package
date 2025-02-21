@@ -6,7 +6,6 @@ with base as (
 
 fields as (
     select
-        _fivetran_synced,
     {{
         fivetran_utils.fill_staging_columns(
             source_columns=adapter.get_columns_in_relation(ref('stg_fivetran_facebook_ads__ad_performance_v_1_video_p_50_watched_actions_tmp')),

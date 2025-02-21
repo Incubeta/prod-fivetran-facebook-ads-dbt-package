@@ -6,7 +6,6 @@ with base as (
 
 fields as (
     select
-        _fivetran_synced,
 
     {{
         fivetran_utils.fill_staging_columns(
