@@ -1,0 +1,38 @@
+version: 2
+
+sources:
+  - name: facebook_ads
+    schema: "{{var('facebook_ads_schema',  target.dataset)}}"
+    loader: Fivetran
+    loaded_at_field: _fivetran_synced
+
+    freshness:
+      warn_after: {count: 48, period: hour}
+      error_after: {count: 168, period: hour}
+    tables:
+      - name: facebook_ad_performance_v_1
+        identifier: "{{var('facebook_ads_ad_performance_v_1_identifier', 'facebook_ad_performance_v_1')}}"
+      - name: facebook_ad_performance_v_1_actions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_actions_identifier', 'facebook_ad_performance_v_1_actions')}}"
+      - name: facebook_ad_performance_v_1_action_values
+        identifier: "{{var('facebook_ads_ad_performance_v_1_action_values_identifier', 'facebook_ad_performance_v_1_action_values')}}"
+      - name: facebook_ad_performance_v_1_video_p_25_watched_actions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_25_watched_actions_identifier', 'facebook_ad_performance_v_1_video_p_25_watched_actions')}}"
+      - name: facebook_ad_performance_v_1_video_p_50_watched_actions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_50_watched_actions_identifier', 'facebook_ad_performance_v_1_video_p_50_watched_actions')}}"
+      - name: facebook_ad_performance_v_1_video_p_75_watched_actions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_75_watched_actions_identifier', 'facebook_ad_performance_v_1_video_p_75_watched_actions')}}"
+      - name: facebook_ad_performance_v_1_video_p_95_watched_actions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_95_watched_actions_identifier', 'facebook_ad_performance_v_1_video_p_95_watched_actions')}}"
+      - name: facebook_ad_performance_v_1_video_p_100_watched_actions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_100_watched_actions_identifier', 'facebook_ad_performance_v_1_video_p_100_watched_actions')}}"
+      - name: facebook_ad_performance_v_1_video_30_sec_watched_actions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_video_30_sec_watched_actions_identifier', 'facebook_ad_performance_v_1_video_30_sec_watched_actions')}}"
+      - name: facebook_ad_performance_v_1_video_avg_time_watched_actions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_video_avg_time_watched_actions_identifier', 'facebook_ad_performance_v_1_video_avg_time_watched_actions')}}"
+      - name: facebook_ad_performance_v_1_video_play_actions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_video_play_actions_identifier', 'facebook_ad_performance_v_1_video_play_actions')}}"
+      - name: facebook_ad_performance_v_1_outbound_clicks
+        identifier: "{{var('facebook_ads_ad_performance_v_1_outbound_clicks_identifier', 'facebook_ad_performance_v_1_outbound_clicks')}}"
+      - name: facebook_ad_performance_v_1_conversions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_conversions_identifier', 'facebook_ad_performance_v_1_conversions')}}"
