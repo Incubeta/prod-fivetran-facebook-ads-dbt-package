@@ -16,16 +16,16 @@ sources:
         identifier: "{{var('facebook_ads_ad_performance_v_1_actions_identifier', 'facebook_ad_performance_v_1_actions')}}"
       - name: facebook_ad_performance_v_1_action_values
         identifier: "{{var('facebook_ads_ad_performance_v_1_action_values_identifier', 'facebook_ad_performance_v_1_action_values')}}"
-      - name: facebook_ad_performance_v_1_video_avg_p_25_watched_actions
-        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_25_watched_actions_identifier', 'facebook_ad_performance_v_1_video_avg_p_25_watched_actions')}}"
-      - name: facebook_ad_performance_v_1_video_avg_p_50_watched_actions
-        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_50_watched_actions_identifier', 'facebook_ad_performance_v_1_video_avg_p_50_watched_actions')}}"
-      - name: facebook_ad_performance_v_1_video_avg_p_75_watched_actions
-        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_75_watched_actions_identifier', 'facebook_ad_performance_v_1_video_avg_p_75_watched_actions')}}"
-      - name: facebook_ad_performance_v_1_video_avg_p_95_watched_actions
-        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_95_watched_actions_identifier', 'facebook_ad_performance_v_1_video_avg_p_95_watched_actions')}}"
-      - name: facebook_ad_performance_v_1_video_avg_p_100_watched_actions
-        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_100_watched_actions_identifier', 'facebook_ad_performance_v_1_video_avg_p_100_watched_actions')}}"
+      - name: facebook_ad_performance_v_1_video_p_25_watched_actions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_25_watched_actions_identifier', 'facebook_ad_performance_v_1_video_p_25_watched_actions')}}"
+      - name: facebook_ad_performance_v_1_video_p_50_watched_actions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_50_watched_actions_identifier', 'facebook_ad_performance_v_1_video_p_50_watched_actions')}}"
+      - name: facebook_ad_performance_v_1_video_p_75_watched_actions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_75_watched_actions_identifier', 'facebook_ad_performance_v_1_video_p_75_watched_actions')}}"
+      - name: facebook_ad_performance_v_1_video_p_95_watched_actions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_95_watched_actions_identifier', 'facebook_ad_performance_v_1_video_p_95_watched_actions')}}"
+      - name: facebook_ad_performance_v_1_video_p_100_watched_actions
+        identifier: "{{var('facebook_ads_ad_performance_v_1_video_p_100_watched_actions_identifier', 'facebook_ad_performance_v_1_video_p_100_watched_actions')}}"
       - name: facebook_ad_performance_v_1_video_30_sec_watched_actions
         identifier: "{{var('facebook_ads_ad_performance_v_1_video_30_sec_watched_actions_identifier', 'facebook_ad_performance_v_1_video_30_sec_watched_actions')}}"
       - name: facebook_ad_performance_v_1_video_avg_time_watched_actions
