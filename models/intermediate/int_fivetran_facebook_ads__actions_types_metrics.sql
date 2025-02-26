@@ -92,7 +92,7 @@ metrics_join as (
         sum(action_total_attributions) as action_total_attributions,
         sum(action_value_total_attributions) as action_value_total_attributions,
         sum(outbound_clicks) as outbound_clicks,
-        sum(conversions) as conversions,
+        sum(coalesce(conversions, 0)) as conversions,
         {{ generate_action_types_sum("action", "7d_click") }}
         {{ generate_action_types_sum("action", "1d_view") }}
         {{ generate_action_types_sum("action", "default") }}
