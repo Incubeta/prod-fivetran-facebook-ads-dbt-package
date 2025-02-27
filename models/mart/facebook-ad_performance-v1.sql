@@ -1,3 +1,4 @@
+
 with performance_report as (
     select *
     from {{ ref('int_fivetran_facebook_ads__ad_performance_v_1') }}
@@ -63,7 +64,8 @@ report as (
         {{ generate_action_types_columns("value", "1d_view") }}
         {{ generate_action_types_columns("value", "default") }}
         {{ add_fields("campaign_name") }},
-        {{ add_adname_split("ad_name") }}
+        {{ add_adname_split("ad_name") }},
+        {{add_action_types()}},
 
     -- cost/ exchange_source.ex_rate _gbp_cost,
     -- (offsite_conversion_fb_pixel_purchase_default_value) / exchange_source.ex_rate _gb_revenue
