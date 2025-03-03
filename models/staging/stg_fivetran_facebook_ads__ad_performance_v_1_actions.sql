@@ -28,9 +28,9 @@ final as (
         _fivetran_id as fivetran_id,
         ad_id,
         date,
-        cast(coalesce(_1_d_view, 0) as {{ dbt.type_float() }}) as _1_d_view,
-        cast(coalesce(_7_d_click, 0) as {{ dbt.type_float() }}) as _7_d_click,
-        cast(coalesce(value, 0) as {{ dbt.type_float() }}) as value
+        cast(coalesce(_1_d_view, 0) as {{ dbt.type_int() }}) as _1_d_view,
+        cast(coalesce(_7_d_click, 0) as {{ dbt.type_int() }}) as _7_d_click,
+        cast(coalesce(value, 0) as {{ dbt.type_int() }}) as value
     from fields
 
 )

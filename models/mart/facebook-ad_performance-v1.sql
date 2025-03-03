@@ -13,9 +13,9 @@ combined_actions as (
 
 report as (
     select
-        performance_report._fivetran_synced,
-        null as action_type,
-        null as actrion_attribution_window,
+        unique_id,
+        SAFE_CAST(null as STRING) as action_type,
+        SAFE_CAST(null as STRING) as action_attribution_window,
         campaign_id,
         day,
         objective,
@@ -23,16 +23,16 @@ report as (
         attribution_setting,
         action_total_attributions as actions,
         account_id,
-        null as unique_actions,
+        0 as unique_actions,
         action_value_total_attributions as action_values,
         performance_report.ad_id,
-        null as unique_clicks,
+        0 as unique_clicks,
         adset_name,
         cost,
         ad_name,
         account_name,
         inline_link_clicks,
-        null as date_stop,
+        SAFE_CAST(null as DATE) as date_stop,
         frequency,
         outbound_clicks,
         adset_id,
@@ -43,15 +43,15 @@ report as (
         clicks,
         device_platform,
         campaign_name,
-        null as ad_creative_url_tags,
-        null as ad_creative_image_url,
+        SAFE_CAST(null as STRING) as ad_creative_url_tags,
+        SAFE_CAST(null as STRING) as ad_creative_image_url,
         video_p25_watched_actions,
         video_p100_watched_actions,
         canvas_avg_view_percent,
         video_p75_watched_actions,
         video_avg_time_watched_actions as video_time_watched_actions,
         video_30_sec_watched_actions,
-        null as video_15_sec_watched_actions,
+        0 as video_15_sec_watched_actions,
         conversions,
         video_p95_watched_actions,
         video_p50_watched_actions,
@@ -65,7 +65,6 @@ report as (
         {{ generate_action_types_columns("value", "default") }}
         {{ add_fields("campaign_name") }},
         {{ add_adname_split("ad_name") }},
-        {{add_action_types()}}
 
     -- cost/ exchange_source.ex_rate _gbp_cost,
     -- (offsite_conversion_fb_pixel_purchase_default_value) / exchange_source.ex_rate _gb_revenue
@@ -77,6 +76,7 @@ report as (
         on
             performance_report.day = combined_actions.date
             and performance_report.ad_id = combined_actions.ad_id
+            and performance_report.fivetran_id = combined_actions.fivetran_id
 
 /*
 left join exchange_source

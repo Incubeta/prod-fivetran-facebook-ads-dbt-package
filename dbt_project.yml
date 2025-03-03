@@ -37,6 +37,6 @@ models:
 vars:
   facebook_ads_schema: facebook_ads
   custom_action_types: None
-  campaign_segment_separator: None
-  client_account_structure: None
+  campaign_segment_separator: _
+  client_account_structure: Floral Street
   custom_fields: None
