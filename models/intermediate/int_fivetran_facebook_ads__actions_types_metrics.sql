@@ -72,7 +72,7 @@ metrics_join as (
         actions_metrics.ad_id,
         actions_metrics.date,
         sum(action_total_attributions) as action_total_attributions,
-        sum(action_value_total_attributions) as action_value_total_attributions,
+        ROUND(sum(action_value_total_attributions), 2) as action_value_total_attributions,
         sum(outbound_clicks) as outbound_clicks,
         sum(coalesce(conversions, 0)) as conversions,
         {{ generate_action_types_sum("action", "7d_click") }}
