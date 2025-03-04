@@ -1,6 +1,7 @@
 with performance_report as (
     select
-        _fivetran_synced,
+    fivetran_id,
+        {{dbt_utils.generate_surrogate_key(["day", "ad_id", "adset_id", "publisher_platform", "device_platform"])}} as unique_id,
         day,
         ad_id,
         ad_name,

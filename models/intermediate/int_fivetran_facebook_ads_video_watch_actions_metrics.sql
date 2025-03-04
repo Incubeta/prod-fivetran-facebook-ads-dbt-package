@@ -1,62 +1,61 @@
 with p25_report as (
     select *
     from
-        {{ ref('stg_fivetran_facebooks_ads__ad_performance_v_1_video_p_25_watched_actions') }}
+        {{ ref('stg_fivetran_facebook_ads__ad_performance_v_1_video_p_25_watched_actions') }}
 
 ),
 
 p50_report as (
     select *
     from
-        {{ ref('stg_fivetran_facebooks_ads__ad_performance_v_1_video_p_50_watched_actions') }}
+        {{ ref('stg_fivetran_facebook_ads__ad_performance_v_1_video_p_50_watched_actions') }}
 
 ),
 
 p75_report as (
     select *
     from
-        {{ ref('stg_fivetran_facebooks_ads__ad_performance_v_1_video_p_75_watched_actions') }}
+        {{ ref('stg_fivetran_facebook_ads__ad_performance_v_1_video_p_75_watched_actions') }}
 
 ),
 
 p95_report as (
     select *
     from
-        {{ ref('stg_fivetran_facebooks_ads__ad_performance_v_1_video_p_95_watched_actions') }}
+        {{ ref('stg_fivetran_facebook_ads__ad_performance_v_1_video_p_95_watched_actions') }}
 
 ),
 
 p100_report as (
     select *
     from
-        {{ ref('stg_fivetran_facebooks_ads__ad_performance_v_1_video_p_100_watched_actions') }}
+        {{ ref('stg_fivetran_facebook_ads__ad_performance_v_1_video_p_100_watched_actions') }}
 
 ),
 
 _30_sec_report as (
     select *
     from
-        {{ ref('stg_fivetran_facebooks_ads__ad_performance_v_1_video_30_sec_watched_actions') }}
+        {{ ref('stg_fivetran_facebook_ads__ad_performance_v_1_video_30_sec_watched_actions') }}
 
 ),
 
 avg_time_report as (
     select *
     from
-        {{ ref('stg_fivetran_facebooks_ads__ad_performance_v_1_video_avg_time_watched_actions') }}
+        {{ ref('stg_fivetran_facebook_ads__ad_performance_v_1_video_avg_time_watched_actions') }}
 
 ),
 
 play_report as (
     select *
     from
-        {{ ref('stg_fivetran_facebooks_ads__ad_performance_v_1_video_play_actions') }}
+        {{ ref('stg_fivetran_facebook_ads__ad_performance_v_1_video_play_actions') }}
 
 ),
 
 p25_metrics as (
     select
-        source_relation,
         action_type,
         idx,
         fivetran_id,
@@ -69,7 +68,6 @@ p25_metrics as (
 
 p50_metrics as (
     select
-        source_relation,
         action_type,
         idx,
         fivetran_id,
@@ -82,7 +80,6 @@ p50_metrics as (
 
 p75_metrics as (
     select
-        source_relation,
         action_type,
         idx,
         fivetran_id,
@@ -95,7 +92,6 @@ p75_metrics as (
 
 p95_metrics as (
     select
-        source_relation,
         action_type,
         idx,
         fivetran_id,
@@ -108,7 +104,6 @@ p95_metrics as (
 
 p100_metrics as (
     select
-        source_relation,
         action_type,
         idx,
         fivetran_id,
@@ -121,7 +116,6 @@ p100_metrics as (
 
 _30_sec_metrics as (
     select
-        source_relation,
         action_type,
         idx,
         fivetran_id,
@@ -134,7 +128,6 @@ _30_sec_metrics as (
 
 avg_time_metrics as (
     select
-        source_relation,
         action_type,
         idx,
         fivetran_id,
@@ -147,7 +140,6 @@ avg_time_metrics as (
 
 play_metrics as (
     select
-        source_relation,
         action_type,
         idx,
         fivetran_id,
@@ -160,10 +152,9 @@ play_metrics as (
 
 metrics_join as (
     select
-        p25_metrics.source_relation,
-        p25_metrics.fivetran_id,
-        p25_metrics.ad_id,
-        p25_metrics.date,
+        COALESCE(p25_metrics.fivetran_id,p50_metrics.fivetran_id,p75_metrics.fivetran_id,p95_metrics.fivetran_id,p100_metrics.fivetran_id,_30_sec_metrics.fivetran_id,play_metrics.fivetran_id,avg_time_metrics.fivetran_id) as fivetran_id,
+        COALESCE(p25_metrics.ad_id,p50_metrics.ad_id,p75_metrics.ad_id,p95_metrics.ad_id,p100_metrics.ad_id,_30_sec_metrics.ad_id,play_metrics.ad_id,avg_time_metrics.ad_id) as ad_id,
+        COALESCE(p25_metrics.date,p50_metrics.date,p75_metrics.date,p95_metrics.date,p100_metrics.date,_30_sec_metrics.date,play_metrics.date,avg_time_metrics.date) as date,
         sum(action_video_p25_watched) as video_p25_watched_actions,
         sum(action_video_p50_watched) as video_p50_watched_actions,
         sum(action_video_p75_watched) as video_p75_watched_actions,
@@ -173,64 +164,50 @@ metrics_join as (
         sum(action_video_avg_time) as video_avg_time_watched_actions,
         sum(action_video_play) as video_play_actions
     from p25_metrics
-    left join p50_metrics
+    full join p50_metrics
         on
-            p25_metrics.source_relation = p50_metrics.source_relation
-            and p25_metrics.action_type = p50_metrics.action_type
-            and p25_metrics.idx = p50_metrics.idx
-            and p25_metrics.ad_id = p50_metrics.ad_id
+            p25_metrics.ad_id = p50_metrics.ad_id
             and p25_metrics.date = p50_metrics.date
+            and p25_metrics.fivetran_id = p50_metrics.fivetran_id
 
 
-    left join p75_metrics
+    full join p75_metrics
         on
-            p25_metrics.source_relation = p75_metrics.source_relation
-            and p25_metrics.action_type = p75_metrics.action_type
-            and p25_metrics.idx = p75_metrics.idx
-            and p25_metrics.ad_id = p75_metrics.ad_id
+            p25_metrics.ad_id = p75_metrics.ad_id
             and p25_metrics.date = p75_metrics.date
+            and p25_metrics.fivetran_id = p75_metrics.fivetran_id
 
 
-    left join p95_metrics
+    full join p95_metrics
         on
-            p25_metrics.source_relation = p95_metrics.source_relation
-            and p25_metrics.action_type = p95_metrics.action_type
-            and p25_metrics.idx = p95_metrics.idx
-            and p25_metrics.ad_id = p95_metrics.ad_id
+            p25_metrics.ad_id = p95_metrics.ad_id
             and p25_metrics.date = p95_metrics.date
+            and p25_metrics.fivetran_id = p95_metrics.fivetran_id
 
 
-    left join p100_metrics
+    full join p100_metrics
         on
-            p25_metrics.source_relation = p100_metrics.source_relation
-            and p25_metrics.action_type = p100_metrics.action_type
-            and p25_metrics.idx = p100_metrics.idx
-            and p25_metrics.ad_id = p100_metrics.ad_id
+            p25_metrics.ad_id = p100_metrics.ad_id
             and p25_metrics.date = p100_metrics.date
+            and p25_metrics.fivetran_id = p100_metrics.fivetran_id
 
-    left join _30_sec_metrics
+    full join _30_sec_metrics
         on
-            p25_metrics.source_relation = _30_sec_metrics.source_relation
-            and p25_metrics.action_type = _30_sec_metrics.action_type
-            and p25_metrics.idx = _30_sec_metrics.idx
-            and p25_metrics.ad_id = _30_sec_metrics.ad_id
+            p25_metrics.ad_id = _30_sec_metrics.ad_id
             and p25_metrics.date = _30_sec_metrics.date
+            and p25_metrics.fivetran_id = _30_sec_metrics.fivetran_id
 
-    left join play_metrics
+    full join play_metrics
         on
-            p25_metrics.source_relation = play_metrics.source_relation
-            and p25_metrics.action_type = play_metrics.action_type
-            and p25_metrics.idx = play_metrics.idx
-            and p25_metrics.ad_id = play_metrics.ad_id
+            p25_metrics.ad_id = play_metrics.ad_id
             and p25_metrics.date = play_metrics.date
 
-    left join avg_time_metrics
+            and p25_metrics.fivetran_id = play_metrics.fivetran_id
+    full join avg_time_metrics
         on
-            p25_metrics.source_relation = avg_time_metrics.source_relation
-            and p25_metrics.action_type = avg_time_metrics.action_type
-            and p25_metrics.idx = avg_time_metrics.idx
-            and p25_metrics.ad_id = avg_time_metrics.ad_id
+            p25_metrics.ad_id = avg_time_metrics.ad_id
             and p25_metrics.date = avg_time_metrics.date
+            and p25_metrics.fivetran_id = avg_time_metrics.fivetran_id
 
 
 

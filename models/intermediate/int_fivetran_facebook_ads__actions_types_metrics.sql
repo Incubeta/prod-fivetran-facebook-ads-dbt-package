@@ -7,26 +7,22 @@ with actions_report as (
 action_values_report as (
     select *
     from
-        {{ ref('stg_fivetran_facebooks_ads__ad_performance_v_1_action_values') }}
+        {{ ref('stg_fivetran_facebook_ads__ad_performance_v_1_action_values') }}
 ),
 
 conversions_report as (
     select *
-    from {{ ref('stg_fivetran_facebooks_ads__ad_performance_v_1_conversions') }}
+    from {{ ref('stg_fivetran_facebook_ads__ad_performance_v_1_conversions') }}
 ),
 
 outbound_clicks_report as (
     select *
     from
-        {{ ref('stg_fivetran_facebooks_ads__ad_performance_v_1_outbound_clicks') }}
+        {{ ref('stg_fivetran_facebook_ads__ad_performance_v_1_outbound_clicks') }}
 ),
 
 actions_metrics as (
     select
-        _fivetran_synced,
-        source_relation,
-        action_type,
-        idx,
         fivetran_id,
         ad_id,
         date,
@@ -39,10 +35,6 @@ actions_metrics as (
 
 action_value_metrics as (
     select
-        _fivetran_synced,
-        source_relation,
-        action_type,
-        idx,
         fivetran_id,
         ad_id,
         date,
@@ -55,10 +47,6 @@ action_value_metrics as (
 
 conversions_metrics as (
     select
-        _fivetran_synced,
-        source_relation,
-        action_type,
-        idx,
         fivetran_id,
         ad_id,
         date,
@@ -69,10 +57,6 @@ conversions_metrics as (
 
 outbound_clicks_metrics as (
     select
-        _fivetran_synced,
-        source_relation,
-        action_type,
-        idx,
         fivetran_id,
         ad_id,
         date,
@@ -83,14 +67,12 @@ outbound_clicks_metrics as (
 
 metrics_join as (
     select
-        actions_metrics._fivetran_synced,
-        actions_metrics.source_relation,
 
         actions_metrics.fivetran_id,
         actions_metrics.ad_id,
         actions_metrics.date,
         sum(action_total_attributions) as action_total_attributions,
-        sum(action_value_total_attributions) as action_value_total_attributions,
+        ROUND(sum(action_value_total_attributions), 2) as action_value_total_attributions,
         sum(outbound_clicks) as outbound_clicks,
         sum(coalesce(conversions, 0)) as conversions,
         {{ generate_action_types_sum("action", "7d_click") }}
@@ -102,34 +84,24 @@ metrics_join as (
     from actions_metrics
     left join action_value_metrics
         on
-            actions_metrics.source_relation
-            = action_value_metrics.source_relation
-            and actions_metrics.action_type = action_value_metrics.action_type
-            and actions_metrics.idx = action_value_metrics.idx
-            and actions_metrics.ad_id = action_value_metrics.ad_id
+            actions_metrics.ad_id = action_value_metrics.ad_id
             and actions_metrics.date = action_value_metrics.date
+            and actions_metrics.fivetran_id = action_value_metrics.fivetran_id
 
 
 
     left join conversions_metrics
         on
-            actions_metrics.source_relation
-            = conversions_metrics.source_relation
-            and actions_metrics.action_type = conversions_metrics.action_type
-            and actions_metrics.idx = conversions_metrics.idx
-            and actions_metrics.ad_id = conversions_metrics.ad_id
+            actions_metrics.ad_id = conversions_metrics.ad_id
             and actions_metrics.date = conversions_metrics.date
+            and actions_metrics.fivetran_id = conversions_metrics.fivetran_id
 
 
     left join outbound_clicks_metrics
         on
-            actions_metrics.source_relation
-            = outbound_clicks_metrics.source_relation
-            and actions_metrics.action_type
-            = outbound_clicks_metrics.action_type
-            and actions_metrics.idx = outbound_clicks_metrics.idx
-            and actions_metrics.ad_id = outbound_clicks_metrics.ad_id
+            actions_metrics.ad_id = outbound_clicks_metrics.ad_id
             and actions_metrics.date = outbound_clicks_metrics.date
+            and actions_metrics.fivetran_id = outbound_clicks_metrics.fivetran_id
     group by all
 
 )
