@@ -3,7 +3,7 @@
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
 name: 'fivetran_facebook_ads'
-version: '1.0.1'
+version: '1.1.0'
 
 # This setting configures which "profile" dbt uses for this project.
 profile: 'dbt_facebook_ads_perfumeshop'
@@ -37,6 +37,6 @@ models:
 vars:
   facebook_ads_schema: facebook_ads
   custom_action_types: None
-  campaign_segment_separator: _
-  client_account_structure: Floral Street
+  campaign_segment_separator: None
+  client_account_structure: None
   custom_fields: None
