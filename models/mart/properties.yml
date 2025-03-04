@@ -12,7 +12,7 @@ models:
   - name: facebook-ad_performance-v1
     config:
       materialized: incremental
-      incremental_strattegy: insert_overwrite
+      incremental_strategy: insert_overwrite
       partition_by:
         field: day 
         data_type: date 

@@ -40,3 +40,4 @@ vars:
   campaign_segment_separator: None
   client_account_structure: None
   custom_fields: None
+  days_ago: 3
