@@ -2,17 +2,11 @@
 with performance_report as (
     select *
     from {{ ref('int_fivetran_facebook_ads__ad_performance_v_1') }}
-{% if is_incremental() %}
-WHERE day >= {{ dbt_date.n_days_ago(var('days_ago', 1), date="day") }}
-{% endif %}
 ),
 
 combined_actions as (
     select *
     from {{ ref('int_fivetran_facebook_ads_combined_actions') }}
-{% if is_incremental() %}
-WHERE date >= {{ dbt_date.n_days_ago(var('days_ago', 1), date="date") }}
-{% endif %}
 ),
 
 report as (

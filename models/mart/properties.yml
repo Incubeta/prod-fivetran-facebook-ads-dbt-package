@@ -4,7 +4,11 @@ models:
   - name: facebook_ad_performance_with_conversion_data_v_1
     config:
       materialized: incremental
-      incremental_strategy: insert_overwrite
+      incremental_strategy: microbatch
+      full_refresh: false
+      event_time: day 
+      batch_size: day
+      begin: 2022-01-01
       partition_by:
         field: day
         data_type: date
@@ -12,7 +16,11 @@ models:
   - name: facebook-ad_performance-v1
     config:
       materialized: incremental
-      incremental_strategy: insert_overwrite
+      incremental_strategy: microbatch
+      full_refresh: false
+      event_time: day 
+      batch_size: day
+      begin: 2022-01-01
       partition_by:
         field: day 
         data_type: date 
