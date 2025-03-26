@@ -9,6 +9,7 @@ models:
       event_time: day 
       batch_size: day
       begin: 2022-01-01
+      lookback: "{{var('days_ago', 1)}}"
       partition_by:
         field: day
         data_type: date
@@ -21,6 +22,7 @@ models:
       event_time: day 
       batch_size: day
       begin: 2022-01-01
+      lookback: "{{var('days_ago', 1)}}"
       partition_by:
         field: day 
         data_type: date 
