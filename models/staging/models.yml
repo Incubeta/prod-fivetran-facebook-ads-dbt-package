@@ -1,0 +1,41 @@
+version: 2
+models:
+  - name: stg_fivetran_facebook_ads__ad_performance_v_1_action_values 
+    config:
+      event_time: date
+  - name: stg_fivetran_facebook_ads__ad_performance_v_1_actions
+    config: 
+      event_time: date
+  - name: stg_fivetran_facebook_ads__ad_performance_v_1_conversions
+    config:
+      event_time: date
+  - name: stg_fivetran_facebook_ads__ad_performance_v_1_outbound_clicks
+    config:
+      event_time: date
+  - name: stg_fivetran_facebook_ads__ad_performance_v_1
+    config:
+      event_time: date
+  - name: stg_fivetran_facebook_ads__ad_performance_v_1_video_30_sec_watched_actions
+    config:
+      event_time: date
+  - name: stg_fivetran_facebook_ads__ad_performance_v_1_video_avg_time_watched_actions
+    config:
+      event_time: date
+  - name: stg_fivetran_facebook_ads__ad_performance_v_1_video_p_25_watched_actions
+    config:
+      event_time: date
+  - name: stg_fivetran_facebook_ads__ad_performance_v_1_video_p_50_watched_actions
+    config:
+      event_time: date
+  - name: stg_fivetran_facebook_ads__ad_performance_v_1_video_p_75_watched_actions
+    config:
+      event_time: date
+  - name: stg_fivetran_facebook_ads__ad_performance_v_1_video_p_95_watched_actions
+    config:
+      event_time: date
+  - name: stg_fivetran_facebook_ads__ad_performance_v_1_video_p_100_watched_actions
+    config:
+      event_time: date
+  - name: stg_fivetran_facebook_ads__ad_performance_v_1_video_play_actions
+    config:
+      event_time: date

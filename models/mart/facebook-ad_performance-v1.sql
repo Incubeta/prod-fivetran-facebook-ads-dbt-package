@@ -2,13 +2,11 @@
 with performance_report as (
     select *
     from {{ ref('int_fivetran_facebook_ads__ad_performance_v_1') }}
-	{{ fivetran_incremental_filter() }}
 ),
 
 combined_actions as (
     select *
     from {{ ref('int_fivetran_facebook_ads_combined_actions') }}
-	{{ fivetran_incremental_filter() }}
 ),
 
 report as (

@@ -1,0 +1,14 @@
+version: 2
+models:
+  - name: int_fivetran_facebook_ads__actions_types_metrics
+    config:
+      event_time: date
+  - name: int_fivetran_facebook_ads__ad_performance_v_1
+    config:
+      event_time: day
+  - name: int_fivetran_facebook_ads_combined_actions
+    config:
+      event_time: date
+  - name: int_fivetran_facebook_ads_video_watch_actions_metrics
+    config:
+      event_time: date

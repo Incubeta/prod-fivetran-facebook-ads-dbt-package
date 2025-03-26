@@ -1,18 +1,14 @@
 with performance_report as (
     select *
     from {{ ref('int_fivetran_facebook_ads__ad_performance_v_1') }}
-	{{ fivetran_incremental_filter() }}
 ),
 
 combined_actions as (
     select *
     from {{ ref('int_fivetran_facebook_ads_combined_actions') }}
-	{{ fivetran_incremental_filter() }}
 ),
-
 report as (
     select
-        performance_report._fivetran_synced,
         null as action_type,
         null as actrion_attribution_window,
         campaign_id,
@@ -75,6 +71,7 @@ report as (
         on
             performance_report.day = combined_actions.date
             and performance_report.ad_id = combined_actions.ad_id
+            and performance_report.fivetran_id = combined_actions.fivetran_id
 
 /*
 left join exchange_source
