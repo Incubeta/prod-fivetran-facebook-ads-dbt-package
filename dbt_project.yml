@@ -35,7 +35,7 @@ models:
     facebook_ads:
       +materialized: view
 vars:
-  facebook_ads_schema: facebook_ads
+  facebook_ads_schema: dpl_uk_tech_dev_avinash_facebook_ads
   custom_action_types: None
   campaign_segment_separator: None
   client_account_structure: None
