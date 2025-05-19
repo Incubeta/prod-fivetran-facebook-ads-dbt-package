@@ -4,6 +4,5 @@
         schema_variable='facebook_ads_schema',
         default_database=target.database,
         default_schema='facebook_ads',
-    )
-     
+    )     
 }}
