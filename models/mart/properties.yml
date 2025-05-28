@@ -29,5 +29,35 @@ models:
         granularity: day 
       schema: PUB_base
       alias: facebook-ad_performance-v1
+  - name: 5t-facebook-ad_performance-v1
+    config:
+      materialized: incremental
+      incremental_strategy: microbatch
+      full_refresh: false
+      event_time: day
+      batch_size: day
+      begin: 2025-01-01
+      lookback: "{{var('days_ago', 1)}}"
+      partition_by: 
+        field: day
+        data_type: date
+        granularity: day
+      schema: PUB_base
+      alias: 5t-facebook-ad_performance-v1
+  - name: 5t-facebook-ad_performance_with_conversion_data_v_1
+    config:
+      materialized: incremental
+      incremental_strategy: microbatch
+      full_refresh: false
+      event_time: day
+      batch_size: day
+      begin: 2025-01-01
+      lookback: "{{var('days_ago', 1)}}"
+      partition_by: 
+        field: day
+        data_type: date
+        granularity: day
+      schema: PUB_base
+      alias: 5t-facebook-ad_performance-with_conversion_data-v1
 
 
