@@ -138,7 +138,7 @@ WITH
     action_type,
     SUM(value) AS conversions
   FROM
-    `{{ var('project_id') }}.{{ var('dataset_id') }}.facebook_ad_performance_v_1_conversions`
+    {{ source('facebook_ads', 'facebook_ad_performance_v_1_conversions') }}
   GROUP BY 1,2,3,4,5),
   actions_combined AS (
   SELECT
