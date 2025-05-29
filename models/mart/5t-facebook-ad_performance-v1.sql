@@ -269,7 +269,7 @@ exchange_source AS (
     select 
         day,
         currency_code,
-        rate as ex_rate
+        ex_rate
     from {{ref('openexchange_rates','stg_openexchange_rates__openexchange_report_v1')}}
 )
 
