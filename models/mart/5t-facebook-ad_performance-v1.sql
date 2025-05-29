@@ -268,7 +268,7 @@ GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 ),
 exchange_source AS (
     select 
         day,
-        currency as currency_code,
+        currency_code,
         rate as ex_rate
     from {{ref('openexchange_rates','stg_openexchange_rates__openexchange_report_v1')}}
 )
