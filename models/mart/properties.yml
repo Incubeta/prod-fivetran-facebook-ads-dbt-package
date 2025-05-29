@@ -38,6 +38,7 @@ models:
       batch_size: day
       begin: 2025-01-01
       lookback: "{{var('days_ago', 1)}}"
+      omit_default_schema: true
       partition_by: 
         field: day
         data_type: date
@@ -53,6 +54,7 @@ models:
       batch_size: day
       begin: 2025-01-01
       lookback: "{{var('days_ago', 1)}}"
+      omit_default_schema: true
       partition_by: 
         field: day
         data_type: date
