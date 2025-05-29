@@ -362,5 +362,5 @@ LEFT JOIN exchange_source
 
 /* Jinja var if default field has null value.Replace the default field based on the report */
 
-    AND LOWER(IFNULL(TRIM(account_currency), '{{ var('account_currency') }}')) = source_b.currency_code  --using TRIM to get rid of trailing whitespace
+    AND LOWER(IFNULL(TRIM(account_currency), '{{ var('account_currency') }}')) = exchange_source.currency_code  --using TRIM to get rid of trailing whitespace
 
